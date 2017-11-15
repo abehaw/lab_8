@@ -183,6 +183,10 @@ class Stack
 			    delete temp;
 			    temp = NULL;
 			}
+			else
+			{
+				cout << "There are no elements to pop" << endl;
+			}
 		}
 		~Stack()
 		{
@@ -443,12 +447,12 @@ int main()
 	//*****************end of file validation*******************************************end of file validation***************************
 	//*****************end of file validation*******************************************end of file validation***************************
 	
-	Stack<string> s1;
-	Queue<string> q1;
+	Stack<string> stackOne;
+	Queue<string> queueOne;
 	while (inFile >> str)
 	{
-		s1.push(str);
-		q1.Enqueue(str);
+		stackOne.push(str);
+		queueOne.Enqueue(str);
 		
 	}	
 	
@@ -600,9 +604,28 @@ int main()
 	//**********************************************************************************************
 	//*******************************programmer test portions***************************************
 	//**********************************************************************************************
+	string g;
+	//testing stacks and que with same data
+	Stack<string> stack4(stackOne);
+	Queue<string> queue4(queueOne);
 	
+	cout << "after overloaded constructor print: " << endl;
+	stack4.print();
+	queue4.print();
 	
+	stack4.pop(g);
+	queue4.dequeue(g);
 	
+	cout << "after pop print: " << endl;
+	stack4.print();
+	queue4.print();
+	
+	stack4.MakeEmpty();
+	queue4.MakeEmpty();
+	
+	cout << "after make empty print: " << endl;
+	stack4.print();
+	queue4.print();
 	
 	
 	//*************************************************************************
