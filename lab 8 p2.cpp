@@ -9,7 +9,7 @@ struct NodeType
 {
 	ItemType info;
 	NodeType* next = NULL;
-	NodeType* pre = NULL;
+	NodeType* prev = NULL;
 };
 
 template <class ItemType>
@@ -18,97 +18,180 @@ class Queue
 	private:
 		NodeType<ItemType>* front;
 		NodeType<ItemType>* rear;
-		int element = 0;
+		int element;
 	
 	public:
-	Queue()
-	{
-		element = 0;
-	}
-	Queue(const Queue<ItemType>&x)
-	{
-		element = 0;
-		NodeType<ItemType>* temp;
-		NodeType<ItemType>* prior;
-		NodeType<ItemType>* temp2;
-		temp2 = x.front;
-		
-		
-		temp = new NodeType<ItemType>;
-		front = temp;
-		
-		while (temp2 != NULL)
+		Queue()
 		{
-		
-			temp->info = temp2->info;
-			prior = temp;
+			element = 0;
+		}
+		Queue(const Queue<ItemType>&x)
+		{
+			element = 0;
+			NodeType<ItemType>* temp;
+			NodeType<ItemType>* prior;
+			NodeType<ItemType>* temp2;
+			temp2 = x.front;
 			
-			temp2 = temp2->next;
-			
-			element++;
-			
-			if (element == 5)
-			{
-				break;
-			}
 			
 			temp = new NodeType<ItemType>;
+			front = temp;
 			
-			prior->next = temp;
+			while (temp2 != NULL)
+			{
+			
+				temp->info = temp2->info;
+				prior = temp;
+				
+				temp2 = temp2->next;
+				
+				rear = temp;
+				
+				element++;
+				
+				if (element == 5)
+				{
+					break;
+				}
+				
+				temp = new NodeType<ItemType>;
+				
+				prior->next = temp;
+				temp->prev = prior;
+			
+			}
+		}
+			
+		void MakeEmpty()
+		{
+			front = NULL;
+			rear = NULL;
+			element = 0;
+		}
 		
-		}
-	}
-		
-	void MakeEmpty()
-	{
-		delete front, rear;
-		front = NULL;
-		rear = NULL;
-		element = 0;
-	}
-	
-	bool isEmpty()
-	{
-		if (element == 0)
+		bool isEmpty()
 		{
-			return true;
+			if (element == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-		else
+		bool isFull() //assume MaxItem is equal to 5
 		{
-			return false;
+			if (element >= 5)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-	}
-	bool isFull() //assume MaxItem is equal to 5
-	{
-		if (element >= 5)
+		int length()
 		{
-			return true;
+			return element;
 		}
-		else
+		void print()
 		{
-			return false;
+			NodeType<ItemType>* temp;
+			temp = front;
+			cout << "\nThe elements in side the stack are:";
+			while(temp!=NULL)
+		    {
+		    	//push back onto the vector the letter inside the node
+			    cout << endl << temp->info;
+			    //get the next node
+		        temp=temp->next;
+		    }
 		}
-	}
-	int length()
-	{
-		return element;
-	}
-	void print()
-	{
-		//need to finish
-	}
-	void Enqueue(ItemType x)   // Add an element
-	{
-		//need to finish
-	}
-	void dequeue(ItemType &x)// Removes the top element
-	{
-		//need to finish
-	}
-	~Queue()
-	{
-		//do nothing
-	}
+		void Enqueue(ItemType x)   // Add an element
+		{
+			//add to the back of the list
+			if(element <= 5)
+			{
+				if(element == 0)
+				{
+					NodeType<ItemType>* temp;
+					temp = new NodeType<ItemType>;
+					
+					temp->info = x;
+					
+					temp->next = NULL;
+					
+					front = temp;
+					element++;
+				}
+				else
+				{
+					NodeType<ItemType>* pre;
+					NodeType<ItemType>* temp;
+					temp = front;
+					
+					while(temp!= NULL)
+					{
+						pre = temp;
+						temp = temp->next;
+					}
+					
+					temp = new NodeType<ItemType>;
+					
+					temp->info = x;
+					
+					temp->next = NULL;
+					pre->next = temp;
+					
+					temp->prev = pre;
+					element++;
+				}
+			}
+			else
+			{
+				cout << "The stack is full and can not contain more elements." << endl;
+			}
+			
+		}
+		void dequeue(ItemType &x)
+		{
+			// Removes the first element
+			NodeType<ItemType>* temp;
+			
+			if(element == 0)
+			{
+				cout << "There are no elements to remove" << endl;
+			}
+			else if(element == 1)
+			{
+				MakeEmpty();
+			}
+			else
+			{
+				NodeType<ItemType>* first;
+				NodeType<ItemType>* second;
+				
+				first = front;
+				
+				second = first->next;
+				second->prev = NULL;
+				
+			    front = second;
+			    first->next = NULL;
+			    
+			    delete first, second;
+			    first = NULL;
+			    second = NULL;
+			}
+		}
+		~Queue()
+		{
+			delete rear;
+			delete front;
+			rear = NULL;
+			front = NULL;
+		}
 };
  
  
@@ -128,20 +211,21 @@ int main()
 	cout << "The int stack contains: " << endl;
 	iq.print();
 	if (iq.isFull() == false)
-		cout << "The int queue is not full!" << endl;
+		cout << "\nThe int queue is not full!" << endl;
 	else
-		cout << "The int queue is full!" << endl;
+		cout << "\nThe int queue is full!" << endl;
+		
 	Queue<float>fq; //float queue
 	float y;
 	fq.MakeEmpty();
 	fq.dequeue(y);
 	fq.dequeue(y);
-	cout << "Float length 3 =" << fq.length() << endl;
+	cout << "Float length 3 = " << fq.length() << endl;
 	fq.Enqueue(y);
-	cout << "float length 3" << fq.length() << endl;
+	cout << "float length 3 = " << fq.length() << endl;
 	fq.Enqueue(2.3);
 	fq.Enqueue(2.3);
-	cout << "float length 4" << fq.length() << endl;
+	cout << "float length 4 = " << fq.length() << endl;
 	fq.Enqueue(3.1);
 	fq.dequeue(y);
 	cout << "The float queue contains: " << endl;
