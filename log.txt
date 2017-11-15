@@ -1,0 +1,45 @@
+**************************beginning of program*******************************Prompted user for file name (contaning data) to openattempting to open the file and check if file was empty or does not existFile processed suscessfuly. File: integers.txtreading file and storing data in a stack
+crating a new instence of stacks
+removing a value
+push two values
+resquesting length 2
+removed value
+added value
+requested lenght 2
+printing the stack
+pushed 3 items
+printed stack
+requested stack status. isFull: 0
+new instence declared
+printed stack values
+deleted all values in stack
+printed stack values
+created new float instence
+removed value
+added value to the stack
+added two value to the stack
+removed a value from the stack
+printed the values in the stack
+setting stacks equal to each other
+printed stack values
+printed stack values
+deleting all values in stack
+print values in stack
+declaring a queue
+deleted all values from queue
+removed value from queue
+added values to queue
+removed value from queue
+printing the values in the queue
+requested values in queue
+deleting all values in queue
+removeing two values from queue
+adding value to the queue
+adding two values to the queue
+added and removed values from the queue
+printing values in queue
+creating new instence
+printed values to the user
+deleting all values in queue
+printing all values in queue
+***********************end of program********terminating****************

@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -114,16 +115,23 @@ class Stack
 		}
 		void print()
 		{
-			NodeType<ItemType>* temp;
-			temp = topPtr;
-			cout << "\nThe elements in side the stack are:";
-			while(temp!=NULL)
-		    {
-		    	//push back onto the vector the letter inside the node
-			    cout << endl << temp->info;
-			    //get the next node
-		        temp=temp->next;
-		    }
+			if(elmtNum = 0)
+			{
+				cout << "there are no elements inside the Queue" << endl;
+			}
+			else
+			{
+				NodeType<ItemType>* temp;
+				temp = topPtr;
+				cout << "\nThe elements in side the stack are:";
+				while(temp!=NULL)
+			    {
+			    	//push back onto the vector the letter inside the node
+				    cout << endl << temp->info;
+				    //get the next node
+			        temp=temp->next;
+			    }
+			}
 		}
 		void push(ItemType x)   // Add an element
 		{
@@ -289,16 +297,23 @@ class Queue
 		}
 		void print()
 		{
-			NodeType<ItemType>* temp;
-			temp = front;
-			cout << "\nThe elements in side the stack are:";
-			while(temp!=NULL)
-		    {
-		    	//push back onto the vector the letter inside the node
-			    cout << endl << temp->info;
-			    //get the next node
-		        temp=temp->next;
-		    }
+			if(element = 0)
+			{
+				cout << "there are no elements inside the Queue" << endl;
+			}
+			else
+			{
+				NodeType<ItemType>* temp;
+				temp = front;
+				cout << "\nThe elements in side the stack are:";
+				while(temp!=NULL)
+			    {
+			    	//push back onto the vector the letter inside the node
+				    cout << endl << temp->info;
+				    //get the next node
+			        temp=temp->next;
+			    }
+			}
 		}
 		void Enqueue(ItemType x)   // Add an element
 		{
@@ -410,7 +425,7 @@ int main()
 	//requesting file from the user
 	//*****************file validation*******************************************file validation***************************
 	//*****************file validation*******************************************file validation***************************
-	cout << "Hello, Please enter the file name contaning integers: " << flush;
+	cout << "Hello, Please enter the file name contaning data: " << flush;
     getline(cin, infilename);
     outFile << "Prompted user for file name (contaning data) to open";
 	
@@ -448,13 +463,14 @@ int main()
 	//*****************end of file validation*******************************************end of file validation***************************
 	
 	Stack<string> stackOne;
-	Queue<string> queueOne;
-	while (inFile >> str)
-	{
-		stackOne.push(str);
-		queueOne.Enqueue(str);
-		
-	}	
+	
+	while (inFile.good()) // read from string stream until EOF
+    {
+        string s;
+        inFile >> s; // read strings from string stream
+        stackOne.push(s);
+    }
+	
 	
 	outFile << "reading file and storing data in a stack";
 	//*****************end of part one*******************************************end of part one***************************
@@ -607,23 +623,23 @@ int main()
 	string g;
 	//testing stacks and que with same data
 	Stack<string> stack4(stackOne);
-	Queue<string> queue4(queueOne);
+	Queue<float> queue4(fq);
 	
-	cout << "after overloaded constructor print: " << endl;
+	cout << "\nafter overloaded constructor print: " << endl;
 	stack4.print();
 	queue4.print();
 	
 	stack4.pop(g);
-	queue4.dequeue(g);
+	queue4.dequeue(y);
 	
-	cout << "after pop print: " << endl;
+	cout << "\nafter pop print: " << endl;
 	stack4.print();
 	queue4.print();
 	
 	stack4.MakeEmpty();
 	queue4.MakeEmpty();
 	
-	cout << "after make empty print: " << endl;
+	cout << "\nafter make empty print: " << endl;
 	stack4.print();
 	queue4.print();
 	
