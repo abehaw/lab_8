@@ -137,7 +137,6 @@ class Stack
 						temp = temp->next;
 					}
 					
-					
 					temp = new NodeType<ItemType>;
 					temp->info = x;
 					temp->next = NULL;

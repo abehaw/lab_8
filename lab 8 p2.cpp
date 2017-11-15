@@ -1,117 +1,157 @@
-//Program Name: template class stack
-//Programmer Name: Chris Josebalan
-//Description: implementing class stack
-//Date Created: 11/9/17
- 
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <stdexcept>
 using namespace std;
- 
+
 template<class ItemType>
 struct NodeType
 {
 	ItemType info;
-	NodeType* next;
+	NodeType* next = NULL;
+	NodeType* pre = NULL;
 };
- 
+
 template <class ItemType>
-class Stack 
+class Queue
 {
 	private:
-		NodeType<ItemType>* topPtr;
+		NodeType<ItemType>* front;
+		NodeType<ItemType>* rear;
+		int element = 0;
 	
 	public:
-		Stack();
-		Stack(const Stack<ItemType>&x);
-		void MakeEmpty();
-		bool isEmpty();
-		bool isFull();
-		int length();
-		void print();
-		void push(ItemType x);   // Add an element
-		void pop(ItemType &x);   // Removes the top element
-		~Stack()
+	Queue()
+	{
+		element = 0;
+	}
+	Queue(const Queue<ItemType>&x)
+	{
+		element = 0;
+		NodeType<ItemType>* temp;
+		NodeType<ItemType>* prior;
+		NodeType<ItemType>* temp2;
+		temp2 = x.front;
+		
+		
+		temp = new NodeType<ItemType>;
+		front = temp;
+		
+		while (temp2 != NULL)
 		{
-			//do nothing
+		
+			temp->info = temp2->info;
+			prior = temp;
+			
+			temp2 = temp2->next;
+			
+			element++;
+			
+			if (element == 5)
+			{
+				break;
+			}
+			
+			temp = new NodeType<ItemType>;
+			
+			prior->next = temp;
+		
 		}
+	}
+		
+	void MakeEmpty()
+	{
+		delete front, rear;
+		front = NULL;
+		rear = NULL;
+		element = 0;
+	}
+	
+	bool isEmpty()
+	{
+		if (element == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool isFull() //assume MaxItem is equal to 5
+	{
+		if (element >= 5)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	int length()
+	{
+		return element;
+	}
+	void print()
+	{
+		//need to finish
+	}
+	void Enqueue(ItemType x)   // Add an element
+	{
+		//need to finish
+	}
+	void dequeue(ItemType &x)// Removes the top element
+	{
+		//need to finish
+	}
+	~Queue()
+	{
+		//do nothing
+	}
 };
-// 
-//template <class ItemType>
-//void Stack<ItemType>::push(ItemType x)
-//{
-//              elements.push_back(element);
-//}
-// 
-//template <class ItemType>
-//void Stack<ItemType>::pop(ItemType &x)
-//{
-//              if (elements.empty())
-//                           throw std::out_of_range("Stack is empty");
-//              else
-//                           elements.pop_back();
-//}
-// 
-////Description: Used to display values inside the stack
-////pre-condition:
-////post-condition:Called in main to display values inside the stack
-//template <class ItemType>
-//void Stack<ItemType>::print()
-//{
-//              return elements.print();
-//}
-// 
-//template <class ItemType>
-//int Stack<T>::length()
-//{
-//              return elements.size();
-//} 
+ 
  
 int main()
 {
-	/*Stack<int> s;//stack
+	Queue<int> iq;//integer queue
 	int x;
-/*	s.pop(x);
-	s.push(11);
-	s.push(22);
-	cout << "int length 1 = " << s.length() << endl;
-	s.pop(x);
-	s.push(33);
-	cout << "int length 2 = " << s.length() << endl;
+	iq.MakeEmpty();
+	iq.dequeue(x);
+	iq.Enqueue(10);
+	iq.Enqueue(20);
+	iq.Enqueue(30);
+	iq.Enqueue(40);
+	cout << "int length 3 = " << iq.length() << endl;
+	iq.dequeue(x);
+	cout << "int length 4 = " << iq.length() << endl;
 	cout << "The int stack contains: " << endl;
-	s.print();
-	s.push(44);
-	s.push(55);
-	s.push(66);
-	if (s.isFull() == false)
-		cout << "The stack is not full!" << endl;
+	iq.print();
+	if (iq.isFull() == false)
+		cout << "The int queue is not full!" << endl;
 	else
-		cout << "The stack is full!" << endl;
-	Stack <int> s2(s);
-	cout << "The stack 2 contains: " << endl;
-	s2.print();
-	//s2.makeEmpty();
-	cout << "The stack 2 contains: " << endl;
-	s2.print();
-	
-	Stack <float> fs;//float stack
+		cout << "The int queue is full!" << endl;
+	Queue<float>fq; //float queue
 	float y;
-	fs.pop(y);
-	fs.push(7.1);
-	cout << "float length 1 = " << fs.length() << endl;
-	fs.push(2.3);
-	fs.push(3.1);
-	cout << "float length 2 = " << fs.length() << endl;
-	fs.pop(y);
-	cout << "The float stack contains: " << endl;
-	fs.print();
-	Stack <float> fs2 = fs;
-	cout << "The float stack 2 contains: " << endl;
-	fs2.print();
-	fs.MakeEmpty();
-	cout << "The float stack 3 contains: " << endl;
-	fs2.print();*/
+	fq.MakeEmpty();
+	fq.dequeue(y);
+	fq.dequeue(y);
+	cout << "Float length 3 =" << fq.length() << endl;
+	fq.Enqueue(y);
+	cout << "float length 3" << fq.length() << endl;
+	fq.Enqueue(2.3);
+	fq.Enqueue(2.3);
+	cout << "float length 4" << fq.length() << endl;
+	fq.Enqueue(3.1);
+	fq.dequeue(y);
+	cout << "The float queue contains: " << endl;
+	fq.print();
 	
-return 0;
+	Queue<float> fq2 = fq;
+	cout << "The float queue 2 contains: " << endl;
+	fq2.print();
+	fq.MakeEmpty();
+	cout << "The float queue 2 contains: " << endl;
+	fq2.print();
+	return 0;
 }
