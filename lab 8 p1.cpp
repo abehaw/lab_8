@@ -224,5 +224,5 @@ int main()
 	cout << "\nThe float stack 3 contains: " << endl;
 	fs2.print();
 	
-return 0;
+	return 0;
 }
