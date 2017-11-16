@@ -7,6 +7,10 @@
 
 using namespace std;
 
+//Description: struct containing two pointers and a data feild
+//             this struct is used to make nodes
+//Pre-condition: N/A
+//Post-condition: N/A
 template<class ItemType>
 struct NodeType
 {
@@ -25,18 +29,25 @@ struct NodeType
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
+//Description: class that holds the head pointer for the list stack
+//             and has methods that preforme actions on the stack
+//Pre-condition: N/A
+//Post-condition: N/A
 template <class ItemType>
 class Stack
 {
+      //declaring two pinter varables
 	private:
 		NodeType<ItemType>* topPtr;
 		int elmtNum;
 	 
 	public:
+           //defalut constructor that sets elements to 0
 		Stack()
 		{
 			elmtNum = 0;
 		}
+		//deep copy of the list
 		Stack(Stack<ItemType> &x)
 		{
 			elmtNum = 0;
@@ -53,7 +64,7 @@ class Stack
 			}*/
 			temp = new NodeType<ItemType>;
 			topPtr = temp;
-			
+			//loop though the list
 			while(temp2 != NULL)
 			{
 				//cout << endl <<"********" << temp2->info << endl;
@@ -81,12 +92,14 @@ class Stack
 				
 			}
 		}
+//		delete all elements
 		void MakeEmpty()
 		{
 			delete topPtr;
 			topPtr = NULL;
 			elmtNum = 0;
 		}
+		//returne true if element is 0 otherwise reutne false
 		bool isEmpty()
 		{
 			if(elmtNum == 0)
@@ -98,6 +111,7 @@ class Stack
 				return false;
 			}
 		}
+		//returne true if elelmts is 5 and false otherwise
 		bool isFull()
 		{
 			if(elmtNum >= 5)
@@ -109,16 +123,20 @@ class Stack
 				return false;
 			}
 		}
+//		retune the lenght of the list by returning elmtNum
 		int length()
 		{
 		    return elmtNum;
 		}
+		//print the list
 		void print()
 		{
+             //if elements are 0 there is nothing to print
 			if(elmtNum = 0)
 			{
 				cout << "there are no elements inside the Queue" << endl;
 			}
+			//loop thought the list printing the elelemtns
 			else
 			{
 				NodeType<ItemType>* temp;
@@ -133,10 +151,13 @@ class Stack
 			    }
 			}
 		}
+		//add an element to the list
 		void push(ItemType x)   // Add an element
 		{
+             //check if the elements are more then or equal to 5
 			if(elmtNum <= 5)
 			{
+                       //if first elements do this
 				if(elmtNum == 0)
 				{
 					NodeType<ItemType>* temp;
@@ -146,6 +167,7 @@ class Stack
 					topPtr = temp;
 					elmtNum++;
 				}
+				//if not the first elements do this
 				else
 				{
 					NodeType<ItemType>* pre;
@@ -165,6 +187,7 @@ class Stack
 					elmtNum++;
 				}
 			}
+			//can not add more elements
 			else
 			{
 				cout << "The stack is full and can not contain more elements." << endl;
@@ -172,12 +195,14 @@ class Stack
 		}
 		void pop(ItemType &x)   // Removes the top element
 		{
+             //removes the last element from the list
 			if(elmtNum != 0)
 			{
 				NodeType<ItemType>* pre;
 				NodeType<ItemType>* temp;
 				temp = topPtr;
 				
+				//loop thought the list
 				while(temp->next != NULL)
 			    {
 			    	pre = temp;
@@ -196,6 +221,7 @@ class Stack
 				cout << "There are no elements to pop" << endl;
 			}
 		}
+		//deconstructor that does nothing
 		~Stack()
 		{
 			//do nothing
@@ -205,13 +231,17 @@ class Stack
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
+//**********************/******\**********************************************
+//*********************/********\*********************************************
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
-//****************************************************************************
-//****************************************************************************
+//Description: this class holds two pointers front and rear for a linked list
+//             this class also contas methods that preforme actions on the list
+//Pre-condition: N/A
+//Post-condition: N/A
 template <class ItemType>
 class Queue
 {
@@ -221,10 +251,12 @@ class Queue
 		int element;
 	
 	public:
+        //set elements to 0
 		Queue()
 		{
 			element = 0;
 		}
+		//overloaded constructor that deep copy a different list
 		Queue(const Queue<ItemType>&x)
 		{
 			element = 0;
@@ -237,6 +269,7 @@ class Queue
 			temp = new NodeType<ItemType>;
 			front = temp;
 			
+			//loop thought the list
 			while (temp2 != NULL)
 			{
 			
@@ -261,14 +294,14 @@ class Queue
 			
 			}
 		}
-			
+		//empty the list. delete all elements
 		void MakeEmpty()
 		{
 			front = NULL;
 			rear = NULL;
 			element = 0;
 		}
-		
+		//returne if the list have 0 elements
 		bool isEmpty()
 		{
 			if (element == 0)
@@ -280,6 +313,7 @@ class Queue
 				return false;
 			}
 		}
+		//returne if the list have more then 5 elements or not
 		bool isFull() //assume MaxItem is equal to 5
 		{
 			if (element >= 5)
@@ -291,16 +325,20 @@ class Queue
 				return false;
 			}
 		}
+		//return the lenght of the list
 		int length()
 		{
 			return element;
 		}
+		//print the list
 		void print()
 		{
+             //if elements are 0. there are nothing to print
 			if(element = 0)
 			{
 				cout << "there are no elements inside the Queue" << endl;
 			}
+			//else loop thought the list printing the elements
 			else
 			{
 				NodeType<ItemType>* temp;
@@ -318,10 +356,14 @@ class Queue
 		void Enqueue(ItemType x)   // Add an element
 		{
 			//add to the back of the list
+			
+			//check if elements are more then 5
 			if(element <= 5)
 			{
+                //check if elelemts are 0
 				if(element == 0)
 				{
+                    //execute code if elements are 0
 					NodeType<ItemType>* temp;
 					temp = new NodeType<ItemType>;
 					
@@ -332,6 +374,7 @@ class Queue
 					front = temp;
 					element++;
 				}
+				//other wise execute this code
 				else
 				{
 					NodeType<ItemType>* pre;
@@ -355,25 +398,30 @@ class Queue
 					element++;
 				}
 			}
+			//can not add more then 5 elements
 			else
 			{
 				cout << "The stack is full and can not contain more elements." << endl;
 			}
 			
 		}
+		//remove the first element from the queue
 		void dequeue(ItemType &x)
 		{
 			// Removes the first element
 			NodeType<ItemType>* temp;
 			
+			//checking if elements are 0
 			if(element == 0)
 			{
 				cout << "There are no elements to remove" << endl;
 			}
+			//one element only
 			else if(element == 1)
 			{
 				MakeEmpty();
 			}
+			//execute this if elements are more then 1
 			else
 			{
 				NodeType<ItemType>* first;
@@ -392,6 +440,7 @@ class Queue
 			    second = NULL;
 			}
 		}
+		//deconstructor
 		~Queue()
 		{
 			delete rear;
@@ -411,8 +460,12 @@ class Queue
 //****************************************************************************
 //****************************************************************************
 //****************************************************************************
+//Description: main function that will create instences and make 
+//Pre-condition: N/A
+//Post-condition: N/A
 int main()
 {
+    //opening ouput file
 	ofstream outFile;
 	outFile.open ("log.txt");
 	outFile << "**************************beginning of program*******************************";
@@ -478,6 +531,7 @@ int main()
 	//*****************end of part one*******************************************end of part one***************************
 	//*****************end of part one*******************************************end of part one***************************
 	
+	//given code
 	Stack<int> s;//stack
 	outFile << "\ncrating a new instence of stacks";
 	int x;
@@ -554,8 +608,8 @@ int main()
 	outFile << "\nprint values in stack";
 	//*******************************************************************
 	//*******************************************************************
-	//*******************************************************************
-	//*******************************************************************
+	//******************part 2 of given code***************************
+	//******************part 2 of given code*****************************
 	//*******************************************************************
 	//*******************************************************************
 	Queue<int> iq;//integer queue
